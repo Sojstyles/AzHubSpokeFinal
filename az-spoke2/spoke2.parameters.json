@@ -1,0 +1,36 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "spokeNetworkTwo": {
+            "value": {
+                "name": "vnet-spoke-two",
+                "addressPrefix": "10.200.0.0/16",
+                "subnetName": "snet-spoke-resources",
+                "subnetPrefix": "10.200.0.0/16",
+                "subnetNsgName": "nsg-spoke-two-resources"
+            }
+        },
+        "bastionHost": {
+            "value": {
+                "name": "AzureBastionHost",
+                "publicIPAddressName": "pip-bastion",
+                "subnetName": "AzureBastionSubnet",
+                "nsgName": "nsg-hub-bastion",
+                "subnetPrefix": "10.0.1.0/29"
+            }
+        },
+        "azureFirewall": {
+            "value": {
+                "name": "AzureFirewall",
+                "publicIPAddressName": "pip-firewall",
+                "subnetName": "AzureFirewallSubnet",
+                "subnetPrefix": "10.0.3.0/26",
+                "routeName": "r-nexthop-to-fw"
+            }
+        },
+        "location": {
+            "value": ""
+        }
+    }
+}
