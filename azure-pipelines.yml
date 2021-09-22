@@ -1,0 +1,42 @@
+name: $(BuildDefinitionName)_$(date:yyyyMMdd)$(rev:.r)
+ 
+trigger: none
+ 
+pr: none
+ 
+stages :        
+  - stage: arm_loganalytics_deploy
+    jobs:
+      - job: arm_loganalytics_deploy
+        steps:
+              - checkout: self
+ 
+              - task: AzureResourceManagerTemplateDeployment@3
+                inputs:
+                  deploymentScope: 'Resource Group'
+                  azureResourceManagerConnection: 'AzureVSE'
+                  subscriptionId: '1bcd68af-e392-4b66-9558-697bd7e8dc91'
+                  action: 'Create Or Update Resource Group'
+                  resourceGroupName: 'azhubspoke-rg'
+                  location: 'Japan East'
+                  templateLocation: 'Linked artifact'
+                  csmFile: '$(System.DefaultWorkingDirectory)/loganalytics-workbook/loganalytics.json'
+                  deploymentMode: 'Incremental'
+  
+  - stage: arm_hubvnet_deploy
+    jobs:
+      - job: arm_hubvnet_deploy
+        steps:
+              - checkout: self
+
+              - task: AzureResourceManagerTemplateDeployment@3
+                inputs:
+                  deploymentScope: 'Resource Group'
+                  azureResourceManagerConnection: 'AzureVSE'
+                  subscriptionId: '1bcd68af-e392-4b66-9558-697bd7e8dc91'
+                  action: 'Create Or Update Resource Group'
+                  resourceGroupName: 'azhubspoke-rg'
+                  location: 'Japan East'
+                  templateLocation: 'Linked artifact'
+                  csmFile: '$(System.DefaultWorkingDirectory)/hub-vnet/hub-vnet.json'
+                  deploymentMode: 'Incremental'
