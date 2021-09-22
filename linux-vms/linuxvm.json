@@ -18,7 +18,7 @@
             "type": "int",
             "defaultValue": 0,
             "metadata": {
-                "description": "The count of Windows virtual machines to create."
+                "description": "The count of Linux virtual machines to create."
             }
         },
         "vmSize": {
