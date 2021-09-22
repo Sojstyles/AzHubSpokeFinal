@@ -52,9 +52,6 @@
             "apiVersion": "2020-05-01",
             "name": "[concat(variables('nicNameLinux'), copyIndex())]",
             "location": "[parameters('location')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks', parameters('spokeNetwork').name)]"
-            ],
             "properties": {
                 "ipConfigurations": [
                     {
